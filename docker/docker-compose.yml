@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  gui-vm:
+    build: .
+    container_name: gui_vm
+    ports:
+      - "5900:5900" # VNC Port
+      - "6080:6080" # NoVNC Web Access
+    environment:
+      - DISPLAY=:0
+    restart: unless-stopped
