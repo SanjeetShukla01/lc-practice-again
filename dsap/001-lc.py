@@ -17,12 +17,56 @@ def target_sum(nums:list, target:int) -> list:
 
 
 def target_sum_better(nums:list, target:int) -> list:
-    m = {}
-    for i, x in enumerate(nums):
-        m[x] = i
-        y = target - x
-        if y in m:
-            return [m[y], i]
+    seen = {}
+    for index, number in enumerate(nums):
+        complement = target - number
+        if complement in seen:
+            return [seen[complement], index]
+        seen[number] = index
+
+
+def find_two_sum(nums, target):
+    seen = {}
+    index = 0
+    for number in nums:
+        complement = target - number
+        if complement in seen:
+            return [seen[complement], index]
+        seen[number] = index
+        index = index + 1
+
+    return None
+
+
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def addTwoNumbers(l1, l2):
+    dummy_head = ListNode(0)
+    current = dummy_head
+    carry = 0
+
+    while l1 or l2 or carry:
+        x = l1.val if l1 else 0
+        y = l2.val if l2 else 0
+
+        total = x + y + carry
+        carry = total // 10
+        digit = total % 10
+
+        current.next = ListNode(digit)
+        current = current.next
+
+        if l1:
+            l1 = l1.next
+        if l2:
+            l2 = l2.next
+
+    return dummy_head.next
 
 
 if __name__ == '__main__':
