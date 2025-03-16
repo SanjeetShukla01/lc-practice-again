@@ -32,9 +32,17 @@ def using_pascals_triangle(n: int):
     return dp[n]
 
 
+def is_valid_palindrom(s:str):
+    c_s = ''.join(char.lower() for char in s if char.isalnum())
+    return c_s == c_s[::-1]
+
+
 if __name__ == '__main__':
     s = "kdsjflsjk"
     t = "wuio093jfkdsjflsjkkdslfkjl"
     # print(is_subsequence(s, t))
-    print(getRow(5))
-    print(using_pascals_triangle(5))
+    # print(getRow(5))
+    # print(using_pascals_triangle(5))
+
+    sn = "A man, a plan, a canal: Panama"
+    print(is_valid_palindrom(sn))
