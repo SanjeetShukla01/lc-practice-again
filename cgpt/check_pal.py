@@ -52,6 +52,46 @@ def check_pal6(n:int) -> bool:
     return True
 
 
+def longest_palindromic_substring(s):
+    n = len(s)
+    if n == 0:
+        return ""
+
+    # DP table initialization
+    dp = [[False] * n for _ in range(n)]
+
+    start = 0
+    max_length = 1
+
+    # All substrings of length 1 are palindromes
+    for i in range(n):
+        dp[i][i] = True
+
+    # Check for substrings of length 2
+    for i in range(n - 1):
+        if s[i] == s[i + 1]:
+            dp[i][i + 1] = True
+            start = i
+            max_length = 2
+
+    # Check for substrings of length 3 or more
+    for length in range(3, n + 1):  # Length of substring
+        for i in range(n - length + 1):  # Start index
+            j = i + length - 1  # End index
+
+            if s[i] == s[j] and dp[i + 1][j - 1]:  # Check inner substring
+                dp[i][j] = True
+                start = i
+                max_length = length
+
+    return s[start:start + max_length]
+
+
+# Test case
+A = "AAABAAABD"
+print(longest_palindromic_substring(A))
+
+
 if __name__ == '__main__':
     s = "AAAAAABAAAAAA"
     # print(check_pal(s))
